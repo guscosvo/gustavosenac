@@ -1,0 +1,6 @@
+bot direito
+mostra opção
+open git bash
+git add .
+git commit -m "nome do arquivo"
+git push
