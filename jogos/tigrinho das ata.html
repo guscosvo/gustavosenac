@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tgrinho ds ata</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .winner {
+            animation: pulse 0.5s infinite;
+        }
+        .bet-button:hover {
+            transform: translateY(-2px);
+        }
+        .bet-button:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center mb-8 text-yellow-400">tigrinho das ata</h1>
+        
+        <div class="bg-gray-800 rounded-lg p-6 mb-8 shadow-lg">
+            <div class="flex justify-between items-center mb-6">
+                <div class="text-2xl font-semibold">
+                    Saldo: <span id="balance" class="text-green-400">R$ 1000</span>
+                </div>
+                <div class="text-xl">
+                    Rodada: <span id="round" class="text-blue-400">1</span>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-gray-700 rounded-lg p-4 text-center bet-option" data-player="priscila">
+                    <h3 class="text-2xl font-bold mb-2 text-pink-400">Priscila</h3>
+                    <div class="text-4xl font-bold mb-4" id="priscila-score">0</div>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <button class="bet-button bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded" data-amount="10">R$ 10</button>
+                        <button class="bet-button bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded" data-amount="50">R$ 50</button>
+                        <button class="bet-button bg-pink-600 hover:bg-pink-700 text-white px-4 py-2 rounded" data-amount="100">R$ 100</button>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-700 rounded-lg p-4 text-center bet-option" data-player="alex">
+                    <h3 class="text-2xl font-bold mb-2 text-blue-400">Alex</h3>
+                    <div class="text-4xl font-bold mb-4" id="alex-score">0</div>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <button class="bet-button bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded" data-amount="10">R$ 10</button>
+                        <button class="bet-button bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded" data-amount="50">R$ 50</button>
+                        <button class="bet-button bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded" data-amount="100">R$ 100</button>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-700 rounded-lg p-4 text-center bet-option" data-player="iara">
+                    <h3 class="text-2xl font-bold mb-2 text-purple-400">Iara</h3>
+                    <div class="text-4xl font-bold mb-4" id="iara-score">0</div>
+                    <div class="flex flex-wrap justify-center gap-2">
+                        <button class="bet-button bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded" data-amount="10">R$ 10</button>
+                        <button class="bet-button bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded" data-amount="50">R$ 50</button>
+                        <button class="bet-button bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded" data-amount="100">R$ 100</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-8">
+                <button id="all-in" class="bg-yellow-600 hover:bg-yellow-700 text-white font-bold px-6 py-3 rounded-lg transition-all">
+                    Apostar Tudo
+                </button>
+                <button id="next-round" class="bg-green-600 hover:bg-green-700 text-white font-bold px-6 py-3 rounded-lg transition-all">
+                    Próxima Rodada
+                </button>
+            </div>
+            
+            <div id="message" class="text-center text-xl font-semibold min-h-8 mb-4"></div>
+            
+            <div class="bg-gray-700 rounded-lg p-4">
+                <h3 class="text-xl font-bold mb-2">Histórico de Apostas</h3>
+                <div id="bet-history" class="max-h-40 overflow-y-auto"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Game state
+        let balance = 1000;
+        let currentRound = 1;
+        let currentBet = {
+            player: null,
+            amount: 0
+        };
+        let scores = {
+            priscila: 0,
+            alex: 0,
+            iara: 0
+        };
+        let gameActive = true;
+        
+        // DOM elements
+        const balanceEl = document.getElementById('balance');
+        const roundEl = document.getElementById('round');
+        const priscilaScoreEl = document.getElementById('priscila-score');
+        const alexScoreEl = document.getElementById('alex-score');
+        const iaraScoreEl = document.getElementById('iara-score');
+        const messageEl = document.getElementById('message');
+        const betHistoryEl = document.getElementById('bet-history');
+        const nextRoundBtn = document.getElementById('next-round');
+        const allInBtn = document.getElementById('all-in');
+        const betOptions = document.querySelectorAll('.bet-option');
+        const betButtons = document.querySelectorAll('.bet-button');
+        
+        // Event listeners
+        betButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const amount = parseInt(this.getAttribute('data-amount'));
+                const player = this.closest('.bet-option').getAttribute('data-player');
+                placeBet(player, amount);
+            });
+        });
+        
+        betOptions.forEach(option => {
+            option.addEventListener('click', function(e) {
+                if (e.target.classList.contains('bet-button')) return;
+                const player = this.getAttribute('data-player');
+                placeBet(player, 10); // Default bet amount
+            });
+        });
+        
+        allInBtn.addEventListener('click', function() {
+            if (balance <= 0) {
+                showMessage("Você não tem dinheiro para apostar!", "red");
+                return;
+            }
+            placeBet(currentBet.player || 'priscila', balance);
+        });
+        
+        nextRoundBtn.addEventListener('click', playRound);
+        
+        // Game functions
+        function placeBet(player, amount) {
+            if (!gameActive) {
+                showMessage("Aguarde o resultado da rodada atual!", "red");
+                return;
+            }
+            
+            if (amount > balance) {
+                showMessage("Saldo insuficiente para esta aposta!", "red");
+                return;
+            }
+            
+            currentBet.player = player;
+            currentBet.amount = amount;
+            
+            // Highlight selected player
+            betOptions.forEach(opt => {
+                opt.classList.remove('ring-2', 'ring-yellow-400');
+                if (opt.getAttribute('data-player') === player) {
+                    opt.classList.add('ring-2', 'ring-yellow-400');
+                }
+            });
+            
+            showMessage(`Aposta de R$ ${amount} em ${capitalizeFirstLetter(player)}!`, "yellow");
+            
+            // Add to bet history
+            addToBetHistory(`Rodada ${currentRound}: Apostou R$ ${amount} em ${capitalizeFirstLetter(player)}`);
+        }
+        
+        function playRound() {
+            if (currentBet.amount === 0 || currentBet.player === null) {
+                showMessage("Faça uma aposta primeiro!", "red");
+                return;
+            }
+            
+            if (!gameActive) {
+                resetRound();
+                return;
+            }
+            
+            gameActive = false;
+            
+            // Generate random scores
+            scores.priscila = Math.floor(Math.random() * 100) + 1;
+            scores.alex = Math.floor(Math.random() * 100) + 1;
+            scores.iara = Math.floor(Math.random() * 100) + 1;
+            
+            // Update score displays
+            priscilaScoreEl.textContent = scores.priscila;
+            alexScoreEl.textContent = scores.alex;
+            iaraScoreEl.textContent = scores.iara;
+            
+            // Determine winner
+            const winner = getWinner();
+            
+            // Highlight winner
+            const winnerEl = document.getElementById(`${winner}-score`);
+            winnerEl.parentElement.classList.add('winner');
+            
+            // Check if player won
+            if (currentBet.player === winner) {
+                const winnings = currentBet.amount * 2;
+                balance += winnings;
+                showMessage(`Você ganhou R$ ${winnings}! ${capitalizeFirstLetter(winner)} teve mais ata!`, "green");
+                addToBetHistory(`Rodada ${currentRound}: Ganhou R$ ${winnings} com ${capitalizeFirstLetter(winner)}`);
+            } else {
+                balance -= currentBet.amount;
+                showMessage(`Você perdeu R$ ${currentBet.amount}! ${capitalizeFirstLetter(winner)} teve mais ata.`, "red");
+                addToBetHistory(`Rodada ${currentRound}: Perdeu R$ ${currentBet.amount}`);
+            }
+            
+            // Update balance display
+            balanceEl.textContent = `R$ ${balance}`;
+            
+            // Check if game over
+            if (balance <= 0) {
+                showMessage("Fim de jogo! Você ficou sem dinheiro.", "red");
+                nextRoundBtn.textContent = "Recomeçar";
+                nextRoundBtn.classList.remove('bg-green-600', 'hover:bg-green-700');
+                nextRoundBtn.classList.add('bg-blue-600', 'hover:bg-blue-700');
+            } else {
+                nextRoundBtn.textContent = "Próxima Rodada";
+            }
+            
+            gameActive = true;
+            currentRound++;
+            roundEl.textContent = currentRound;
+            
+            // Reset current bet
+            currentBet = {
+                player: null,
+                amount: 0
+            };
+        }
+        
+        function resetRound() {
+            // Reset scores
+            scores.priscila = 0;
+            scores.alex = 0;
+            scores.iara = 0;
+            
+            // Update displays
+            priscilaScoreEl.textContent = '0';
+            alexScoreEl.textContent = '0';
+            iaraScoreEl.textContent = '0';
+            
+            // Remove winner highlight
+            betOptions.forEach(opt => {
+                opt.classList.remove('winner');
+                opt.classList.remove('ring-2', 'ring-yellow-400');
+            });
+            
+            // Reset game if balance is zero
+            if (balance <= 0) {
+                balance = 1000;
+                currentRound = 1;
+                balanceEl.textContent = `R$ ${balance}`;
+                roundEl.textContent = currentRound;
+                betHistoryEl.innerHTML = '';
+                nextRoundBtn.textContent = "Próxima Rodada";
+                nextRoundBtn.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                nextRoundBtn.classList.add('bg-green-600', 'hover:bg-green-700');
+            }
+            
+            showMessage("Faça sua aposta para a próxima rodada!", "yellow");
+        }
+        
+        function getWinner() {
+            let maxScore = Math.max(scores.priscila, scores.alex, scores.iara);
+            
+            // In case of tie, randomly select one of the top scorers
+            const winners = [];
+            if (scores.priscila === maxScore) winners.push('priscila');
+            if (scores.alex === maxScore) winners.push('alex');
+            if (scores.iara === maxScore) winners.push('iara');
+            
+            return winners[Math.floor(Math.random() * winners.length)];
+        }
+        
+        function showMessage(msg, color) {
+            messageEl.textContent = msg;
+            messageEl.className = `text-center text-xl font-semibold min-h-8 mb-4 text-${color}-400`;
+        }
+        
+        function addToBetHistory(text) {
+            const entry = document.createElement('div');
+            entry.className = 'py-1 border-b border-gray-600';
+            entry.textContent = text;
+            betHistoryEl.prepend(entry);
+        }
+        
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+    </script>
+</body>
+</html>

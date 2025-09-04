@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>A DITADURA CANTOU</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      background-color: #d6d6d6;
+      font-family: Arial, sans-serif;
+      cursor: none; /* Cursor totalmente invisível */
+      user-select: none;
+    }
+
+    .popup {
+      position: absolute;
+      width: 300px;
+      border: 2px solid #000;
+      background-color: #fff;
+      box-shadow: 5px 5px 10px #000;
+      z-index: 9999;
+    }
+
+    .title-bar {
+      background-color: #000080;
+      color: white;
+      padding: 5px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .content {
+      padding: 15px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div id="overlay"></div>
+
+<script>
+  function criarPopup() {
+    const popup = document.createElement('div');
+    popup.className = 'popup';
+
+    const titleBar = document.createElement('div');
+    titleBar.className = 'title-bar';
+    titleBar.innerText = 'Alerta do Sistema';
+
+    const content = document.createElement('div');
+    content.className = 'content';
+    content.innerText = 'A DITADURA CANTOU';
+
+    popup.appendChild(titleBar);
+    popup.appendChild(content);
+    document.body.appendChild(popup);
+
+    popup.style.top = Math.random() * (window.innerHeight - 120) + 'px';
+    popup.style.left = Math.random() * (window.innerWidth - 300) + 'px';
+  }
+
+  // Força foco na aba (quando possível)
+  window.onblur = () => {
+    alert("NÃO FOGE! A DITADURA CANTOU!");
+    window.focus();
+  };
+
+  // Ao clicar, ativa o modo tela cheia e começa o caos
+  let iniciou = false;
+  document.getElementById('overlay').onclick = async () => {
+    if (!iniciou) {
+      iniciou = true;
+
+      // Tenta entrar em tela cheia
+      if (document.documentElement.requestFullscreen) {
+        await document.documentElement.requestFullscreen().catch(() => {});
+      } else if (document.documentElement.webkitRequestFullscreen) {
+        await document.documentElement.webkitRequestFullscreen().catch(() => {});
+      }
+
+      criarPopup();
+    }
+
+    // A cada clique, cria várias janelas
+    for (let i = 0; i < 5; i++) {
+      criarPopup();
+    }
+  };
+</script>
+
+</body>
+</html>
