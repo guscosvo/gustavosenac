@@ -30,3 +30,9 @@
     height: 480px;
     background-color: green;
 }
+#container{
+    width: 980px;
+    height: 560px;
+    margin:auto;
+    background-color: chocolate;
+}
