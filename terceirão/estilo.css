@@ -16,19 +16,19 @@
 #logo{
     width: 200px;
     height: 100px;
-    background-color: blue;
+   /* background-color: blue; */ 
     float: left;
 }
 #menu{
     width: 600px;
     height: 100px;
     float: right;
-    background-color: blue;
+   /* background-color: blue; */
 }
 #banner{
     width: 100%;
     height: 480px;
-    background-color: green;
+   /* background-color: green; */
 }
 #container{
     width: 980px;
