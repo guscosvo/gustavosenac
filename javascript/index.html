@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>js</title>
+    <title>Document</title>
 </head>
 <body>
-    
-
+    <form action="">
+        Nome: <input type="text" id="nome" >
+              <input type="submit" onclick="imprimirVariaveis()" vaule="Cadastrar" >
+    </form>
+ 
     <script>
-        alert("primeiro ano")
+        function imprimirVariaveis(){
+        var nome = document.getElementById('nome').value;
+        var nome = document.getElementById('endereco').value;
+       // var ano = 2025;
+       // var ensino = "Primeiro Ano"
+        alert(nome)
+        }
     </script>
 </body>
-</html></html>
+</html>
+ 
