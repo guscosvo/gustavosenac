@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>matricula</title>
+</head>
+<body>
+   
+    <form>
+        Nome do aluno:<br>
+         <input type="text" id="nome"> <br>
+        Selecione o ano: <select name="cursos" id="cursos">
+            <option> 6º ano </option>
+            <option> 7º ano </option>
+            <option> 8º ano </option>
+        </select>
+       <br>
+       turno: <br>
+        manha <input type="radio" name="sistema" id="sim" value="manha"><br>
+        tarde <input type="radio" name="sistema" id="não" value="tarde" ><br>
+
+        <input type="submit" value="Enviar" onclick="imprimirVariaveis()" >
+    </form>
+ 
+    <script>
+        function imprimirVariaveis() {
+            var nome = document.getElementById('nome').value;
+            var anos = document.getElementById('anos').value;
+
+            var manha = document.getElementById('mamha').value;
+            var tarde = document.getElementById('tarde').value;
+
+ 
+            if(manha.checked){
+            resultado = sim.value;
+            }else if(tarde.checked){
+               resultado = nao.value
+            }else{
+            alert(nome + " " + ano + " " + resultado );
+            document.write(nome + resultado);
+            }
+ 
+        }
+    </script>
+ 
+</body>
+</html>
+ 

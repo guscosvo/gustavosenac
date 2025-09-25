@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>filme</title>
+</head>
+<body>
+   
+    <form>
+        Nome do filme:<br>
+         <input type="text" id="nome"> <br>
+        Selecione o genero: <select name="cursos" id="cursos">
+            <option> ação </option>
+            <option> terror </option>
+            <option> comedia </option>
+        </select>
+       <br>
+       assistido: <br>
+        sim <input type="radio" name="sistema" id="sim" value="sim"><br>
+        não <input type="radio" name="sistema" id="não" value="não" ><br>
+ 
+        <input type="submit" value="Enviar" onclick="imprimirVariaveis()" >
+    </form>
+ 
+    <script>
+        function imprimirVariaveis() {
+            var nome = document.getElementById('nome').value;
+            var cursos = document.getElementById('genero').value;
+
+            var sim = document.getElementById('sim').value;
+            var nao = document.getElementById('não').value;
+
+ 
+            if(sim.checked){
+            resultado = sim.value;
+            }else if(nao.checked){
+               resultado = nao.value
+            }else{
+            alert(nome + " " + genero + " " + resultado );
+            document.write(nome + resultado);
+            }
+ 
+        }
+    </script>
+ 
+</body>
+</html>
+ 
