@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATA Shop - Advertências Escolares Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Comic Neue', cursive;
+            background-color: #f0f9ff;
+            color: #1e3a8a;
+        }
+        
+        .ata-card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        
+        .ata-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .ata-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        
+        }
+        
+        .header {
+            
+            color: rgb(255, 0, 0);
+            border-radius: 0 0 20px 20px;
+            
+        }
+        
+        .cart-bubble {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-5deg); }
+        }
+        
+        .shake {
+            animation: shake 0.5s infinite;
+        }
+    </style>
+</head>
+<body>
+        <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-scroll text-3xl text-indigo-600 mr-2"></i>
+                <h1 class="text-2xl font-bold text-indigo-600">AtaShop</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-gray-700 hover:text-indigo-600 font-medium">home</a></li>
+                    <li><a href="historia.html" class="text-gray-700 hover:text-indigo-600 font-medium">Depoimentos</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="header py-6 px-4 mb-8">
+        <div class="container mx-auto flex justify-between items-center">
+
+            <div class="relative">
+                <button id="cart-btn" class="bg-white text-blue-800 px-4 py-2 rounded-full font-bold hover:bg-blue-100 transition">
+                    <i class="fas fa-shopping-cart mr-2"></i>Carrinho
+                    <span id="cart-count" class="cart-bubble hidden">0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-10">
+            <h2 class="text-4xl font-bold mb-4">Advertências Escolares Premium</h2>
+            <p class="text-xl">Compre agora suas ATAs por motivos absurdos e impressione seus professores!</p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            <!-- ATA 1 -->
+            <div class="ata-card bg-white relative">
+                <div class="ata-badge">-30%</div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">ATA por respirar</h3>
+                        <span class="text-lg font-bold text-blue-600">R$ 9,99 <span class="text-sm text-gray-500 line-through">R$ 14,99</span></span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"O aluno foi flagrado realizando atividades respiratórias durante a aula, perturbando o silêncio sagrado da sala com seus pulmões funcionais."</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500"><i class="fas fa-star text-yellow-400"></i> 4.8 (1.2k)</span>
+                        <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition" data-id="1" data-name="ATA por respirar" data-price="9.99">
+                            <i class="fas fa-cart-plus mr-2"></i>Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ATA 2 -->
+            <div class="ata-card bg-white relative">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">ATA por existir</h3>
+                        <span class="text-lg font-bold text-blue-600">R$ 19,99</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"O aluno teve a audácia de ocupar espaço físico no ambiente escolar sem autorização prévia. Sua mera presença é uma afronta ao regimento."</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500"><i class="fas fa-star text-yellow-400"></i> 4.9 (2.4k)</span>
+                        <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition" data-id="2" data-name="ATA por existir" data-price="19.99">
+                            <i class="fas fa-cart-plus mr-2"></i>Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ATA 3 -->
+            <div class="ata-card bg-white relative">
+                <div class="ata-badge shake">NOVO</div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">ATA por pensar</h3>
+                        <span class="text-lg font-bold text-blue-600">R$ 24,99</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"O aluno foi pego em flagrante exercendo atividade cognitiva sem permissão. Pensamentos não autorizados foram detectados durante a aula."</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500"><i class="fas fa-star text-yellow-400"></i> 5.0 (3.1k)</span>
+                        <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition" data-id="3" data-name="ATA por pensar" data-price="24.99">
+                            <i class="fas fa-cart-plus mr-2"></i>Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ATA 4 -->
+            <div class="ata-card bg-white relative">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">ATA por olhar</h3>
+                        <span class="text-lg font-bold text-blue-600">R$ 14,99</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"O aluno direcionou seus globos oculares para direções não autorizadas pelo docente. O ato de olhar constitui grave violação do código de conduta."</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500"><i class="fas fa-star text-yellow-400"></i> 4.7 (987)</span>
+                        <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition" data-id="4" data-name="ATA por olhar" data-price="14.99">
+                            <i class="fas fa-cart-plus mr-2"></i>Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ATA 5 -->
+            <div class="ata-card bg-white relative">
+                <div class="ata-badge">-15%</div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">ATA por piscar</h3>
+                        <span class="text-lg font-bold text-blue-600">R$ 12,99 <span class="text-sm text-gray-500 line-through">R$ 15,29</span></span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"O aluno cometeu ato repetido de abrir e fechar as pálpebras sem autorização expressa, perturbando o fluxo pedagógico com seus movimentos oculares."</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500"><i class="fas fa-star text-yellow-400"></i> 4.5 (756)</span>
+                        <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition" data-id="5" data-name="ATA por piscar" data-price="12.99">
+                            <i class="fas fa-cart-plus mr-2"></i>Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ATA 6 -->
+            <div class="ata-card bg-white relative">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">ATA por ter batimentos cardíacos</h3>
+                        <span class="text-lg font-bold text-blue-600">R$ 29,99</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"O aluno manteve atividade cardíaca constante durante a aula, produzindo ruídos que podem ter perturbado colegas com audição aguçada."</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500"><i class="fas fa-star text-yellow-400"></i> 4.9 (1.8k)</span>
+                        <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition" data-id="6" data-name="ATA por ter batimentos cardíacos" data-price="29.99">
+                            <i class="fas fa-cart-plus mr-2"></i>Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ATA 7 -->
+            <div class="ata-card bg-white relative">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">ATA por sorrir</h3>
+                        <span class="text-lg font-bold text-blue-600">R$ 17,99</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"O aluno exibiu expressão facial de alegria em momento inadequado, demonstrando falta de seriedade diante do conteúdo acadêmico."</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500"><i class="fas fa-star text-yellow-400"></i> 4.6 (1.1k)</span>
+                        <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition" data-id="7" data-name="ATA por sorrir" data-price="17.99">
+                            <i class="fas fa-cart-plus mr-2"></i>Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ATA 8 -->
+            <div class="ata-card bg-white relative">
+                <div class="ata-badge">-50%</div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">ATA por ter cabelo</h3>
+                        <span class="text-lg font-bold text-blue-600">R$ 7,99 <span class="text-sm text-gray-500 line-through">R$ 15,99</span></span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"O aluno apresentou-se com quantidade excessiva de fios capilares, os quais podem ter refletido luz e distraído outros alunos."</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500"><i class="fas fa-star text-yellow-400"></i> 4.3 (892)</span>
+                        <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition" data-id="8" data-name="ATA por ter cabelo" data-price="7.99">
+                            <i class="fas fa-cart-plus mr-2"></i>Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ATA 9 -->
+            <div class="ata-card bg-white relative">
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold">ATA por ser humano</h3>
+                        <span class="text-lg font-bold text-blue-600">R$ 39,99</span>
+                    </div>
+                    <p class="text-gray-700 mb-4">"O aluno insistiu em manter características humanas básicas (como necessidades fisiológicas e emocionais) durante o período letivo, contrariando o esperado."</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-500"><i class="fas fa-star text-yellow-400"></i> 5.0 (4.2k)</span>
+                        <button class="add-to-cart bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition" data-id="9" data-name="ATA por ser humano" data-price="39.99">
+                            <i class="fas fa-cart-plus mr-2"></i>Comprar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal do Carrinho -->
+    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-2xl font-bold">Seu Carrinho</h3>
+                <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="mb-4">
+                <!-- Itens do carrinho serão adicionados aqui -->
+                <p class="text-gray-500 text-center py-4">Seu carrinho está vazio</p>
+            </div>
+            
+            <div class="border-t pt-4">
+                <div class="flex justify-between mb-2">
+                    <span class="font-bold">Total:</span>
+                    <span id="cart-total" class="font-bold">R$ 0,00</span>
+                </div>
+                <button id="checkout-btn" class="w-full bg-green-600 text-white py-2 rounded-full hover:bg-green-700 transition disabled:opacity-50" disabled>
+                    Finalizar Compra <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de Confirmação -->
+    <div id="confirmation-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-lg p-6 w-full max-w-md text-center">
+            <div class="text-green-500 text-5xl mb-4">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 class="text-2xl font-bold mb-2">Compra realizada!</h3>
+            <p class="mb-4">Sua ATA absurda foi adquirida com sucesso. Agora você pode impressionar seus professores com sua coleção de advertências inúteis!</p>
+            <button id="close-confirmation" class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">
+                Fechar
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cart = [];
+            const cartBtn = document.getElementById('cart-btn');
+            const cartModal = document.getElementById('cart-modal');
+            const closeCart = document.getElementById('close-cart');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const cartCount = document.getElementById('cart-count');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            const confirmationModal = document.getElementById('confirmation-modal');
+            const closeConfirmation = document.getElementById('close-confirmation');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            
+            // Abrir/fechar carrinho
+            cartBtn.addEventListener('click', () => {
+                cartModal.classList.remove('hidden');
+                updateCartDisplay();
+            });
+            
+            closeCart.addEventListener('click', () => {
+                cartModal.classList.add('hidden');
+            });
+            
+            // Adicionar ao carrinho
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const id = button.getAttribute('data-id');
+                    const name = button.getAttribute('data-name');
+                    const price = parseFloat(button.getAttribute('data-price'));
+                    
+                    // Verifica se o item já está no carrinho
+                    const existingItem = cart.find(item => item.id === id);
+                    
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({
+                            id,
+                            name,
+                            price,
+                            quantity: 1
+                        });
+                    }
+                    
+                    updateCartCount();
+                    
+                    // Feedback visual
+                    button.innerHTML = '<i class="fas fa-check mr-2"></i>Adicionado';
+                    button.classList.remove('bg-blue-600');
+                    button.classList.add('bg-green-500');
+                    
+                    setTimeout(() => {
+                        button.innerHTML = '<i class="fas fa-cart-plus mr-2"></i>Comprar';
+                        button.classList.remove('bg-green-500');
+                        button.classList.add('bg-blue-600');
+                    }, 1000);
+                });
+            });
+            
+            // Atualizar contador do carrinho
+            function updateCartCount() {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+                
+                if (totalItems > 0) {
+                    cartCount.classList.remove('hidden');
+                } else {
+                    cartCount.classList.add('hidden');
+                }
+            }
+            
+            // Atualizar exibição do carrinho
+            function updateCartDisplay() {
+                if (cart.length === 0) {
+                    cartItems.innerHTML = '<p class="text-gray-500 text-center py-4">Seu carrinho está vazio</p>';
+                    cartTotal.textContent = 'R$ 0,00';
+                    checkoutBtn.disabled = true;
+                    return;
+                }
+                
+                let html = '';
+                let total = 0;
+                
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    total += itemTotal;
+                    
+                    html += `
+                        <div class="flex justify-between items-center py-3 border-b">
+                            <div>
+                                <h4 class="font-bold">${item.name}</h4>
+                                <p class="text-sm text-gray-500">R$ ${item.price.toFixed(2)}</p>
+                            </div>
+                            <div class="flex items-center">
+                                <button class="decrease-quantity text-blue-600 px-2" data-id="${item.id}">-</button>
+                                <span class="mx-2">${item.quantity}</span>
+                                <button class="increase-quantity text-blue-600 px-2" data-id="${item.id}">+</button>
+                                <button class="remove-item text-red-500 ml-4" data-id="${item.id}">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                cartItems.innerHTML = html;
+                cartTotal.textContent = `R$ ${total.toFixed(2)}`;
+                checkoutBtn.disabled = false;
+                
+                // Adicionar eventos aos novos botões
+                document.querySelectorAll('.decrease-quantity').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const item = cart.find(item => item.id === id);
+                        
+                        if (item.quantity > 1) {
+                            item.quantity -= 1;
+                        } else {
+                            cart.splice(cart.indexOf(item), 1);
+                        }
+                        
+                        updateCartDisplay();
+                        updateCartCount();
+                    });
+                });
+                
+                document.querySelectorAll('.increase-quantity').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const item = cart.find(item => item.id === id);
+                        item.quantity += 1;
+                        
+                        updateCartDisplay();
+                        updateCartCount();
+                    });
+                });
+                
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const id = this.getAttribute('data-id');
+                        const itemIndex = cart.findIndex(item => item.id === id);
+                        cart.splice(itemIndex, 1);
+                        
+                        updateCartDisplay();
+                        updateCartCount();
+                    });
+                });
+            }
+            
+            // Finalizar compra
+            checkoutBtn.addEventListener('click', () => {
+                cartModal.classList.add('hidden');
+                confirmationModal.classList.remove('hidden');
+                
+                // Limpar carrinho
+                cart.length = 0;
+                updateCartCount();
+            });
+            
+            // Fechar modal de confirmação
+            closeConfirmation.addEventListener('click', () => {
+                confirmationModal.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
