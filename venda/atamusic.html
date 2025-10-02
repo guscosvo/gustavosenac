@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ataplaymusic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .progress-container {
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: #1db954;
+            border-radius: 2px;
+            transition: width 0.1s linear;
+        }
+        
+        .song-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02);
+        }
+        
+        .song-item.active {
+            background: rgba(29, 185, 84, 0.2);
+        }
+        
+        .album-art {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .album-art:hover {
+            transform: scale(1.05);
+        }
+        
+        .volume-slider {
+            -webkit-appearance: none;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+        }
+        
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        
+        .upload-area {
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .upload-area:hover {
+            border-color: #1db954;
+            background: rgba(29, 185, 84, 0.05);
+        }
+        
+        .upload-area.dragover {
+            border-color: #1db954;
+            background: rgba(29, 185, 84, 0.1);
+        }
+    </style>
+</head>
+  <header class="bg-blue-950 shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+         
+            <div class="p-6">
+                <h1 class="text-2xl font-bold text-white flex items-center">
+                    <i class="fas fa-music mr-2 text-green-500"></i> ATAplaymusic
+                </h1>
+            </div>
+            </div>
+            <nav>
+                <ul class="flex space-x-4">
+                    <li><a href="ATAland.html" class="text-white hover:text-indigo-600 font-medium">ATAland</a></li>
+                    <li><a href="index.html" class="text-white hover:text-indigo-600 font-medium">home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+<body class="flex flex-col h-screen">
+    <div class="flex flex-1 overflow-hidden">
+        <!-- Sidebar -->
+                </h1>
+            </div>
+                    </ul>
+                </div>
+            </nav>
+            <!-- Content -->
+
+                <h2 class="text-2xl font-bold mb-6">ﾠSua Biblioteca</h2>
+
+                    <table class="w-full">
+                        <thead>
+                            <tr class="border-b border-white border-opacity-10 text-left text-gray-400 text-sm">
+                                <th class="p-4 w-12">#</th>
+                                <th class="p-4">TÍTULO</th>
+                                <th class="p-4">ARTISTA</th>
+                                <th class="p-4">ÁLBUM</th>
+                                <th class="p-4 w-12"><i class="far fa-clock"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody id="song-list">
+                            <!-- Songs will be added here dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Player -->
+    <div class="h-20 bg-black bg-opacity-70 border-t border-gray-800 flex items-center px-4">
+        <div class="w-1/4 flex items-center">
+
+            <div>
+                <h4 class="text-sm font-medium" id="now-playing-title">Nenhuma música selecionada</h4>
+                <p class="text-xs text-gray-400" id="now-playing-artist">Selecione uma música para tocar</p>
+            </div>
+            <button class="ml-4 text-gray-400 hover:text-white">
+                <i class="far fa-heart"></i>
+            </button>
+        </div>
+        
+        <div class="w-2/4 flex flex-col items-center">
+            <div class="flex items-center mb-2">
+                <button id="shuffle" class="mx-2 text-gray-400 hover:text-white">
+                    <i class="fas fa-random"></i>
+                </button>
+                <button id="prev" class="mx-2 text-gray-400 hover:text-white">
+                    <i class="fas fa-step-backward"></i>
+                </button>
+                <button id="play" class="mx-3 w-8 h-8 bg-white rounded-full flex items-center justify-center text-black hover:scale-105 transition-transform">
+                    <i class="fas fa-play"></i>
+                </button>
+                <button id="next" class="mx-2 text-gray-400 hover:text-white">
+                    <i class="fas fa-step-forward"></i>
+                </button>
+                <button id="repeat" class="mx-2 text-gray-400 hover:text-white">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+            
+            <div class="w-full flex items-center">
+                <span class="text-xs text-gray-400 mr-2" id="current-time">0:00</span>
+                <div class="progress-container flex-1">
+                    <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+                </div>
+                <span class="text-xs text-gray-400 ml-2" id="duration">0:00</span>
+            </div>
+        </div>
+        
+
+            </button>
+        </div>
+        
+        <audio id="audio-player"></audio>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+                 alert("ata por ouvir ATAplaymusic")
+            // Elements
+            const audioPlayer = document.getElementById('audio-player');
+            const playBtn = document.getElementById('play');
+            const prevBtn = document.getElementById('prev');
+            const nextBtn = document.getElementById('next');
+            const progressBar = document.getElementById('progress-bar');
+            const currentTimeEl = document.getElementById('current-time');
+            const durationEl = document.getElementById('duration');
+            const songList = document.getElementById('song-list');
+            const nowPlayingTitle = document.getElementById('now-playing-title');
+            const nowPlayingArtist = document.getElementById('now-playing-artist');
+            const uploadArea = document.querySelector('.upload-area');
+            const fileUpload = document.getElementById('file-upload');
+            
+            // State
+            let songs = [];
+            let currentSongIndex = -1;
+            let isPlaying = false;
+            
+            // Sample data - in a real app, this would come from your music files
+            const sampleSongs = [
+                {
+                    title: "se faltar é arte, então enzo é picasso",
+                    artist: "guscosvo",
+                    album: "guscosvo",
+                    duration: "3:10",
+                    file: "enzo.mp3",
+                    cover: "data:image/webp;base64,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"
+                },
+                {
+                    title: "papito",
+                    artist: "guscosvo",
+                    album: "guscosvo",
+                    duration: "1:51",
+                    file: "PAPITO.mp3",
+                    cover: "https://via.placeholder.com/150"
+                },
+                {
+                    title: "ATA e mais ATA",
+                    artist: "guscosvo",
+                    album: "guscosvo",
+                    duration: "3:45",
+                    file: "ata.mp3",
+                    cover: "data:image/webp;base64,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"
+                },
+                {
+                    title: "enzo boz chora por qualquer razão",
+                    artist: "guscosvo",
+                    album: "guscosvo",
+                    duration: "2:17",
+                    file: "boz.mp3",
+                    cover: "data:image/webp;base64,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"
+                },
+                {
+                    title: "cabelo",
+                    artist: "guscosvo",
+                    album: "guscosvo",
+                    duration: "1:44",
+                    file: "cabelo.mp3",
+                    cover: "data:image/webp;base64,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"
+                },
+            ];
+            
+            // Initialize with sample songs
+            songs = [...sampleSongs];
+            renderSongList();
+            
+            // Event Listeners
+            playBtn.addEventListener('click', togglePlay);
+            prevBtn.addEventListener('click', playPrevious);
+            nextBtn.addEventListener('click', playNext);
+            audioPlayer.addEventListener('timeupdate', updateProgress);
+            audioPlayer.addEventListener('ended', playNext);
+            progressBar.parentElement.addEventListener('click', seek);
+            
+            // Upload functionality
+            uploadArea.addEventListener('click', () => fileUpload.click());
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+            fileUpload.addEventListener('change', () => {
+                if (fileUpload.files.length > 0) {
+                    handleFiles(fileUpload.files);
+                }
+            });
+            
+            // Functions
+            function renderSongList() {
+                songList.innerHTML = '';
+                songs.forEach((song, index) => {
+                    const tr = document.createElement('tr');
+                    tr.className = `song-item border-b border-white border-opacity-10 hover:bg-white hover:bg-opacity-10 ${index === currentSongIndex ? 'active' : ''}`;
+                    tr.innerHTML = `
+                        <td class="p-4 text-gray-400">${index + 1}</td>
+                        <td class="p-4 font-medium">${song.title}</td>
+                        <td class="p-4 text-gray-400">${song.artist}</td>
+                        <td class="p-4 text-gray-400">${song.album}</td>
+                        <td class="p-4 text-gray-400">${song.duration}</td>
+                    `;
+                    tr.addEventListener('click', () => playSong(index));
+                    songList.appendChild(tr);
+                });
+            }
+            
+            function playSong(index) {
+                if (index < 0 || index >= songs.length) return;
+                
+                currentSongIndex = index;
+                const song = songs[currentSongIndex];
+                
+                audioPlayer.src = song.file;
+                audioPlayer.play();
+                isPlaying = true;
+                playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                
+                nowPlayingTitle.textContent = song.title;
+                nowPlayingArtist.textContent = song.artist;
+                
+                // Update active song in list
+                renderSongList();
+            }
+            
+            function togglePlay() {
+                if (currentSongIndex === -1 && songs.length > 0) {
+                    playSong(0);
+                    return;
+                }
+                
+                if (isPlaying) {
+                    audioPlayer.pause();
+                    isPlaying = false;
+                    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+                } else {
+                    audioPlayer.play();
+                    isPlaying = true;
+                    playBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+            }
+            
+            function playPrevious() {
+                if (songs.length === 0) return;
+                
+                let newIndex = currentSongIndex - 1;
+                if (newIndex < 0) newIndex = songs.length - 1;
+                
+                playSong(newIndex);
+            }
+            
+            function playNext() {
+                if (songs.length === 0) return;
+                
+                let newIndex = currentSongIndex + 1;
+                if (newIndex >= songs.length) newIndex = 0;
+                
+                playSong(newIndex);
+            }
+            
+            function updateProgress() {
+                if (audioPlayer.duration) {
+                    const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+                    progressBar.style.width = `${progress}%`;
+                    
+                    // Update time displays
+                    currentTimeEl.textContent = formatTime(audioPlayer.currentTime);
+                    durationEl.textContent = formatTime(audioPlayer.duration);
+                }
+            }
+            
+            function formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = Math.floor(seconds % 60);
+                return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            }
+            
+            function seek(e) {
+                const percent = e.offsetX / this.offsetWidth;
+                audioPlayer.currentTime = percent * audioPlayer.duration;
+            }
+            
+            function handleFiles(files) {
+                Array.from(files).forEach(file => {
+                    if (file.type.startsWith('audio/')) {
+                        const newSong = {
+                            title: file.name.replace(/\.[^/.]+$/, ""), // Remove extension
+                            artist: "Desconhecido",
+                            album: "Uploads",
+                            duration: "0:00",
+                            file: URL.createObjectURL(file),
+                            cover: "https://via.placeholder.com/150"
+                        };
+                        songs.push(newSong);
+                    }
+                });
+                
+                renderSongList();
+                
+                // If no song is playing and we added songs, play the first one
+                if (currentSongIndex === -1 && songs.length > 0) {
+                    playSong(0);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

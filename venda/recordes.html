@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recordes Absurdos de ATA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        .header {
+            background: linear-gradient(135deg, #ff0000, #ff6b6b);
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .record-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .record-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .first-place {
+            border: 5px solid gold;
+            animation: glow 2s infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 10px gold;
+            }
+            to {
+                box-shadow: 0 0 20px gold, 0 0 30px gold;
+            }
+        }
+        .second-place {
+            border: 5px solid silver;
+        }
+        .third-place {
+            border: 5px solid #cd7f32; /* bronze */
+        }
+        .counter {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #ff0000;
+            animation: pulse 1s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+   <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-scroll text-3xl text-indigo-600 mr-2"></i>
+                <h1 class="text-2xl font-bold text-indigo-600">AtaShop</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-gray-700 hover:text-indigo-600 font-medium">home</a></li>
+                    <li><a href="historia.html" class="text-gray-700 hover:text-indigo-600 font-medium">Depoimentos</a></li>
+                    <li><a href="contato.html" class="text-gray-700 hover:text-indigo-600 font-medium">Contato</a></li>
+                 <li><a href="avaliar.html" class="text-gray-700 hover:text-indigo-600 font-medium">avalie-me</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+<body class="min-h-screen">
+    <div class="header py-8 text-center mb-10">
+        <h1 class="text-5xl font-bold mb-4">🏆 Recordes Absurdos de ATA 🏆</h1>
+        <p class="text-xl">Celebrando as advertências escolares mais criativas e sem sentido!</p>
+    </div>
+
+    <div class="container mx-auto px-4">
+        <!-- Pódio -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            <!-- Primeiro lugar -->
+            <div class="record-card first-place bg-white p-6 text-center">
+                <div class="text-4xl mb-4">🥇</div>
+                <h3 class="text-2xl font-bold mb-2">Vinicius "O Lendário"</h3>
+                <div class="counter mb-4" id="viniciusCounter">0</div>
+                <p class="text-gray-700 mb-4"><span class="font-bold">Motivo:</span> Por ser o Vinicius</p>
+                <p class="text-sm text-gray-500">Recebe 1 ATA por segundo desde o nascimento</p>
+                <div class="mt-4 p-3 bg-red-100 rounded-lg">
+                    <p class="font-bold text-red-700">"Nem respira direito e já leva ATA"</p>
+                </div>
+            </div>
+
+            <!-- Segundo lugar -->
+            <div class="record-card second-place bg-white p-6 text-center">
+                <div class="text-4xl mb-4">🥈</div>
+                <h3 class="text-2xl font-bold mb-2">João "O Pensador"</h3>
+                <p class="text-3xl font-bold mb-4">2.647 ATAs</p>
+                <p class="text-gray-700 mb-4"><span class="font-bold">Motivo:</span> Pensar durante a aula</p>
+                <p class="text-sm text-gray-500">Recorde máximo que o sistema escolar suporta</p>
+                <div class="mt-4 p-3 bg-gray-100 rounded-lg">
+                    <p class="font-bold text-gray-700">"Cogito, ergo ATA"</p>
+                </div>
+            </div>
+
+            <!-- Terceiro lugar -->
+            <div class="record-card third-place bg-white p-6 text-center">
+                <div class="text-4xl mb-4">🥉</div>
+                <h3 class="text-2xl font-bold mb-2">Maria "A Existente"</h3>
+                <p class="text-3xl font-bold mb-4">999 ATAs</p>
+                <p class="text-gray-700 mb-4"><span class="font-bold">Motivo:</span> Existir na escola</p>
+                <p class="text-sm text-gray-500">ATA automática ao cruzar o portão</p>
+                <div class="mt-4 p-3 bg-amber-100 rounded-lg">
+                    <p class="font-bold text-amber-700">"Só de existir já é motivo"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Outros recordes -->
+        <h2 class="text-3xl font-bold mb-6 text-center">Outros Recordes Memoráveis</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            <!-- Recorde 1 -->
+            <div class="record-card bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold mb-2">Carlos "O Respirante"</h3>
+                <p class="text-2xl font-bold text-red-600 mb-3">500 ATAs</p>
+                <p class="text-gray-700 mb-3"><span class="font-bold">Motivo:</span> Respirar muito alto</p>
+                <div class="flex items-center text-yellow-500 mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="text-sm text-gray-500">"O ar da escola não é para ser respirado" - Diretor</p>
+            </div>
+
+            <!-- Recorde 2 -->
+            <div class="record-card bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold mb-2">Ana "A Piscante"</h3>
+                <p class="text-2xl font-bold text-red-600 mb-3">250 ATAs</p>
+                <p class="text-gray-700 mb-3"><span class="font-bold">Motivo:</span> Piscar os olhos</p>
+                <div class="flex items-center text-yellow-500 mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p class="text-sm text-gray-500">"Piscar é sinal de desrespeito" - Professor</p>
+            </div>
+
+            <!-- Recorde 3 -->
+            <div class="record-card bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold mb-2">Pedro "O Sangrento"</h3>
+                <p class="text-2xl font-bold text-red-600 mb-3">100 ATAs</p>
+                <p class="text-gray-700 mb-3"><span class="font-bold">Motivo:</span> Sangrar após levar uma lapiseira na mão</p>
+                <div class="flex items-center text-yellow-500 mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="text-sm text-gray-500">"Sangue mancha a escola" - Zelador</p>
+            </div>
+
+            <!-- Recorde 4 -->
+            <div class="record-card bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold mb-2">Luiza "A Sorridente"</h3>
+                <p class="text-2xl font-bold text-red-600 mb-3">75 ATAs</p>
+                <p class="text-gray-700 mb-3"><span class="font-bold">Motivo:</span> Sorrir sem permissão</p>
+                <div class="flex items-center text-yellow-500 mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+                <p class="text-sm text-gray-500">"Felicidade atrapalha o aprendizado" - Coordenador</p>
+            </div>
+
+            <!-- Recorde 5 -->
+            <div class="record-card bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold mb-2">Rafael "O Invisível"</h3>
+                <p class="text-2xl font-bold text-red-600 mb-3">50 ATAs</p>
+                <p class="text-gray-700 mb-3"><span class="font-bold">Motivo:</span> Não ser visto na aula</p>
+                <div class="flex items-center text-yellow-500 mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                </div>
+                <p class="text-sm text-gray-500">"Se não vi, é porque estava fazendo algo errado" - Professor</p>
+            </div>
+
+            <!-- Recorde 6 -->
+            <div class="record-card bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold mb-2">Julia "A Meteorológica"</h3>
+                <p class="text-2xl font-bold text-red-600 mb-3">25 ATAs</p>
+                <p class="text-gray-700 mb-3"><span class="font-bold">Motivo:</span> Chover no dia da prova</p>
+                <div class="flex items-center text-yellow-500 mb-2">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="text-sm text-gray-500">"Controlar o clima é obrigação do aluno" - Diretora</p>
+            </div>
+        </div>
+
+        <!-- Seção de curiosidades -->
+        <div class="bg-yellow-100 p-6 rounded-lg mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-center">Curiosidades sobre ATAs</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="text-lg font-bold mb-2 flex items-center">
+                        <i class="fas fa-lightbulb mr-2 text-yellow-500"></i> ATA mais criativa
+                    </h3>
+                    <p>"Por ter um nome que rima com ATA" - Aluno: Renata</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="text-lg font-bold mb-2 flex items-center">
+                        <i class="fas fa-clock mr-2 text-blue-500"></i> ATA mais rápida
+                    </h3>
+                    <p>0.3 segundos após a aula começar - Motivo: "Já estava com cara de quem ia perturbar"</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="text-lg font-bold mb-2 flex items-center">
+                        <i class="fas fa-calendar mr-2 text-red-500"></i> ATA mais antiga
+                    </h3>
+                    <p>1789 - Motivo: "Não trouxe a pena de escrever no dia da Revolução Francesa"</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="text-lg font-bold mb-2 flex items-center">
+                        <i class="fas fa-dna mr-2 text-green-500"></i> ATA mais genética
+                    </h3>
+                    <p>"Por ter herdado o gene da bagunça do pai que também estudou aqui"</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulário para sugerir novos recordes -->
+        <div class="bg-blue-50 p-6 rounded-lg mb-12">
+            <h2 class="text-2xl font-bold mb-4 text-center">Sugira um novo recorde absurdo!</h2>
+            <form class="max-w-lg mx-auto">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2" for="nome">Nome do Aluno:</label>
+                    <input type="text" id="nome" class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2" for="quantidade">Quantidade de ATAs:</label>
+                    <input type="number" id="quantidade" class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2" for="motivo">Motivo Absurdo:</label>
+                    <textarea id="motivo" rows="3" class="w-full px-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+                    <i class="fas fa-paper-plane mr-2"></i> Enviar Sugestão
+                </button>
+            </form>
+        </div>
+
+        <!-- Rodapé -->
+        <footer class="text-center py-6 text-gray-600">
+            <p>© 2023 Museu dos Recordes Absurdos de ATA</p>
+            <p class="text-sm mt-2">Nenhum aluno foi realmente prejudicado na criação desta página (ou será que foi?)</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="text-blue-600 hover:text-blue-800"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="text-pink-600 hover:text-pink-800"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-blue-400 hover:text-blue-600"><i class="fab fa-twitter"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Contador automático para o Vinicius
+        let count = 0;
+        const counterElement = document.getElementById('viniciusCounter');
+        
+        // Data de nascimento fictícia do Vinicius (1 de janeiro de 2000)
+        const birthDate = new Date(2000, 0, 1);
+        const now = new Date();
+        const diffTime = Math.abs(now - birthDate);
+        const diffSeconds = Math.floor(diffTime / 1000);
+        
+        // Iniciar o contador com o valor calculado
+        count = diffSeconds;
+        counterElement.textContent = count.toLocaleString();
+        
+        // Atualizar a cada segundo
+        setInterval(() => {
+            count++;
+            counterElement.textContent = count.toLocaleString();
+        }, 1000);
+
+        // Efeito de confete ao clicar nos cards
+        document.querySelectorAll('.record-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Criar efeito visual simples (poderia ser substituído por uma lib de confete)
+                const effect = document.createElement('div');
+                effect.className = 'absolute w-4 h-4 bg-yellow-400 rounded-full animate-bounce';
+                effect.style.left = Math.random() * 100 + '%';
+                effect.style.top = Math.random() * 100 + '%';
+                this.appendChild(effect);
+                
+                setTimeout(() => {
+                    effect.remove();
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>

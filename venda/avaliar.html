@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliações em Tempo Real</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .star-rating {
+            direction: rtl;
+            unicode-bidi: bidi-override;
+        }
+        .star-rating input {
+            display: none;
+        }
+        .star-rating label {
+            color: #ddd;
+            font-size: 2rem;
+            padding: 0 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #ffc107;
+        }
+        .star-rating input:checked + label {
+            color: #ffc107;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-scroll text-3xl text-indigo-600 mr-2"></i>
+                <h1 class="text-2xl font-bold text-indigo-600">AtaShop</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-gray-700 hover:text-indigo-600 font-medium">home</a></li>
+                    <li><a href="compra.html" class="text-gray-700 hover:text-indigo-600 font-medium">compra</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Cabeçalho -->
+            <header class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-indigo-700 mb-2">Avalie Nosso Serviço</h1>
+                <p class="text-gray-600">Sua opinião é importante para nós! Avalie e veja o que outros estão dizendo.</p>
+                <div class="mt-4 flex justify-center items-center">
+                    <div class="bg-indigo-100 text-indigo-800 px-4 py-2 rounded-full flex items-center">
+                        <i class="fas fa-users mr-2"></i>
+                        <span id="total-reviews">0</span> avaliações
+                    </div>
+                    <div class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full flex items-center ml-4">
+                        <i class="fas fa-star mr-2"></i>
+                        <span id="average-rating">0.0</span>/5.0
+                    </div>
+                </div>
+            </header>
+
+            <!-- Formulário de avaliação -->
+            <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-800">Deixe sua avaliação</h2>
+                
+                <div class="mb-4">
+                    <label for="username" class="block text-gray-700 mb-2">Seu nome</label>
+                    <input type="text" id="username" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Como você gostaria de ser chamado?">
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2">Sua avaliação</label>
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5" />
+                        <label for="star5" title="Excelente"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star4" name="rating" value="4" />
+                        <label for="star4" title="Muito bom"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star3" name="rating" value="3" />
+                        <label for="star3" title="Bom"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star2" name="rating" value="2" />
+                        <label for="star2" title="Regular"><i class="fas fa-star"></i></label>
+                        <input type="radio" id="star1" name="rating" value="1" />
+                        <label for="star1" title="Ruim"><i class="fas fa-star"></i></label>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label for="comment" class="block text-gray-700 mb-2">Comentário (opcional)</label>
+                    <textarea id="comment" rows="3" class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Conte sua experiência..."></textarea>
+                </div>
+                
+                <button id="submit-review" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 flex items-center justify-center">
+                    <i class="fas fa-paper-plane mr-2"></i> Enviar Avaliação
+                </button>
+            </div>
+
+            <!-- Lista de avaliações -->
+            <div class="bg-white rounded-xl shadow-md p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800">Avaliações Recentes</h2>
+                    <div class="relative">
+                        <select id="sort-reviews" class="appearance-none bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                            <option value="newest">Mais recentes</option>
+                            <option value="highest">Melhores avaliações</option>
+                            <option value="lowest">Piores avaliações</option>
+                        </select>
+                        <i class="fas fa-chevron-down absolute right-3 top-3 text-gray-500"></i>
+                    </div>
+                </div>
+                
+                <div id="reviews-container">
+                    <!-- As avaliações serão carregadas aqui -->
+                    <div class="text-center py-8 text-gray-500" id="no-reviews">
+                        <i class="fas fa-comments text-4xl mb-3"></i>
+                        <p>Nenhuma avaliação ainda. Seja o primeiro a avaliar!</p>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-center">
+                    <button id="load-more" class="text-indigo-600 hover:text-indigo-800 font-medium hidden">
+                        <i class="fas fa-sync-alt mr-2"></i>Carregar mais avaliações
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notificação -->
+    <div id="notification" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden items-center">
+        <i class="fas fa-check-circle mr-2"></i>
+        <span id="notification-message">Avaliação enviada com sucesso!</span>
+    </div>
+
+    <script>
+        // Armazenamento de avaliações (no navegador - pode ser substituído por um backend real)
+        let reviews = JSON.parse(localStorage.getItem('reviews')) || [];
+        let currentSort = 'newest';
+        let visibleReviews = 5;
+
+        // Elementos DOM
+        const reviewsContainer = document.getElementById('reviews-container');
+        const noReviewsElement = document.getElementById('no-reviews');
+        const submitButton = document.getElementById('submit-review');
+        const sortSelect = document.getElementById('sort-reviews');
+        const loadMoreButton = document.getElementById('load-more');
+        const notification = document.getElementById('notification');
+        const totalReviewsElement = document.getElementById('total-reviews');
+        const averageRatingElement = document.getElementById('average-rating');
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            updateStats();
+            renderReviews();
+            
+            // Configurar EventSource para simular atualizações em tempo real
+            // Em um ambiente real, você usaria WebSockets ou Server-Sent Events
+            setInterval(checkForNewReviews, 5000);
+        });
+
+        // Verificar novas avaliações (simulação)
+        function checkForNewReviews() {
+            const storedReviews = JSON.parse(localStorage.getItem('reviews')) || [];
+            if (storedReviews.length > reviews.length) {
+                reviews = storedReviews;
+                updateStats();
+                renderReviews();
+                showNotification('Nova avaliação recebida!');
+            }
+        }
+
+        // Enviar avaliação
+        submitButton.addEventListener('click', () => {
+            const username = document.getElementById('username').value.trim();
+            const rating = document.querySelector('input[name="rating"]:checked');
+            const comment = document.getElementById('comment').value.trim();
+            
+            if (!username) {
+                showNotification('Por favor, insira seu nome', 'error');
+                return;
+            }
+            
+            if (!rating) {
+                showNotification('Por favor, selecione uma avaliação', 'error');
+                return;
+            }
+            
+            const newReview = {
+                id: Date.now(),
+                username,
+                rating: parseInt(rating.value),
+                comment,
+                date: new Date().toISOString()
+            };
+            
+            reviews.unshift(newReview);
+            localStorage.setItem('reviews', JSON.stringify(reviews));
+            
+            // Limpar formulário
+            document.getElementById('username').value = '';
+            document.querySelector('input[name="rating"]:checked').checked = false;
+            document.getElementById('comment').value = '';
+            
+            updateStats();
+            renderReviews();
+            showNotification('Avaliação enviada com sucesso!');
+            
+            // Em um ambiente real, você enviaria para o servidor aqui
+            // e o servidor enviaria a atualização para todos os clientes via WebSocket
+        });
+
+        // Ordenar avaliações
+        sortSelect.addEventListener('change', () => {
+            currentSort = sortSelect.value;
+            renderReviews();
+        });
+
+        // Carregar mais avaliações
+        loadMoreButton.addEventListener('click', () => {
+            visibleReviews += 5;
+            renderReviews();
+        });
+
+        // Atualizar estatísticas
+        function updateStats() {
+            totalReviewsElement.textContent = reviews.length;
+            
+            if (reviews.length > 0) {
+                const total = reviews.reduce((sum, review) => sum + review.rating, 0);
+                const average = (total / reviews.length).toFixed(1);
+                averageRatingElement.textContent = average;
+            } else {
+                averageRatingElement.textContent = '0.0';
+            }
+        }
+
+        // Renderizar avaliações
+        function renderReviews() {
+            let sortedReviews = [...reviews];
+            
+            // Ordenar
+            switch (currentSort) {
+                case 'newest':
+                    sortedReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    break;
+                case 'highest':
+                    sortedReviews.sort((a, b) => b.rating - a.rating);
+                    break;
+                case 'lowest':
+                    sortedReviews.sort((a, b) => a.rating - b.rating);
+                    break;
+            }
+            
+            // Limpar container
+            reviewsContainer.innerHTML = '';
+            
+            if (sortedReviews.length === 0) {
+                reviewsContainer.appendChild(noReviewsElement);
+                noReviewsElement.classList.remove('hidden');
+                loadMoreButton.classList.add('hidden');
+                return;
+            } else {
+                noReviewsElement.classList.add('hidden');
+            }
+            
+            // Mostrar apenas as avaliações visíveis
+            const reviewsToShow = sortedReviews.slice(0, visibleReviews);
+            
+            reviewsToShow.forEach(review => {
+                const reviewElement = createReviewElement(review);
+                reviewsContainer.appendChild(reviewElement);
+            });
+            
+            // Mostrar botão "Carregar mais" se houver mais avaliações
+            if (sortedReviews.length > visibleReviews) {
+                loadMoreButton.classList.remove('hidden');
+            } else {
+                loadMoreButton.classList.add('hidden');
+            }
+        }
+
+        // Criar elemento de avaliação
+        function createReviewElement(review) {
+            const reviewElement = document.createElement('div');
+            reviewElement.className = 'border-b border-gray-200 pb-6 mb-6 last:border-0 last:pb-0 last:mb-0 fade-in';
+            
+            const date = new Date(review.date);
+            const formattedDate = date.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            
+            // Criar estrelas
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= review.rating) {
+                    stars += '<i class="fas fa-star text-yellow-400"></i>';
+                } else {
+                    stars += '<i class="far fa-star text-yellow-400"></i>';
+                }
+            }
+            
+            reviewElement.innerHTML = `
+                <div class="flex justify-between items-start mb-2">
+                    <div>
+                        <h3 class="font-bold text-lg text-gray-800">${review.username}</h3>
+                        <div class="flex items-center mt-1">
+                            <div class="flex mr-2">${stars}</div>
+                            <span class="text-sm text-gray-500">${review.rating}.0</span>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-500">${formattedDate}</span>
+                </div>
+                ${review.comment ? `<p class="text-gray-700 mt-2">${review.comment}</p>` : '<p class="text-gray-500 italic mt-2">Sem comentário</p>'}
+            `;
+            
+            return reviewElement;
+        }
+
+        // Mostrar notificação
+        function showNotification(message, type = 'success') {
+            const notificationMessage = document.getElementById('notification-message');
+            notificationMessage.textContent = message;
+            
+            // Alterar cor baseada no tipo
+            if (type === 'error') {
+                notification.classList.remove('bg-green-500');
+                notification.classList.add('bg-red-500');
+            } else {
+                notification.classList.remove('bg-red-500');
+                notification.classList.add('bg-green-500');
+            }
+            
+            notification.classList.remove('hidden');
+            notification.classList.add('flex', 'pulse');
+            
+            setTimeout(() => {
+                notification.classList.remove('pulse');
+                notification.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
