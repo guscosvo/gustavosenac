@@ -185,6 +185,23 @@
     </style>
 </head>
 <body>
+        <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-scroll text-3xl text-indigo-600 mr-2"></i>
+                <h1 class="text-2xl font-bold text-indigo-600">AtaShop</h1>
+            </div>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="index.html" class="text-gray-700 hover:text-indigo-600 font-medium">home</a></li>
+                    <li><a href="recordes.html" class="text-gray-700 hover:text-indigo-600 font-medium">recordes</a></li>
+                    <li><a href="historia.html" class="text-gray-700 hover:text-indigo-600 font-medium">Depoimentos</a></li>
+                    <li><a href="contato.html" class="text-gray-700 hover:text-indigo-600 font-medium">Contato</a></li>
+                 <li><a href="avaliar.html" class="text-gray-700 hover:text-indigo-600 font-medium">avalie-me</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
     <div class="stars" id="stars"></div>
     
     <div class="container mx-auto px-4 py-8 text-center">
@@ -200,24 +217,18 @@
             Bem-vindo ao portal intergaláctico de navegação. Selecione seu destino abaixo:
         </p>
         
-        <div class="portal pulse">
-            <div class="portal-inner">
-                <i class="fas fa-rocket text-4xl mb-4 text-yellow-300"></i>
-                <h2 class="text-xl font-bold">Portal Ativo</h2>
-            </div>
-        </div>
+     
         
         <div class="button-grid">
             <button class="nav-button" onclick="window.location.href='atamusic.html'">
-                <i class="fas fa-search mr-2"></i> ATAplaymusic
+                <i class="fas fa-music mr-2"></i> ATAfy
+            
+            <button class="nav-button" onclick="window.location.href='jogodoenzo.html'">
+                <i class="fas fa-play mr-2"></i> rpg do enzo
             </button>
             
-            <button class="nav-button" onclick="window.location.href='https://www.youtube.com'">
-                <i class="fas fa-play mr-2"></i> Portal de Vídeos
-            </button>
-            
-            <button class="nav-button" onclick="window.location.href='https://www.github.com'">
-                <i class="fas fa-code mr-2"></i> Portal de Códigos
+            <button class="nav-button" onclick="window.location.href='enzocliker.html'">
+                <i class="fas fa-play mr-2"></i> cliker do enzo
             </button>
             
             <button class="nav-button" onclick="window.location.href='https://www.wikipedia.org'">
@@ -233,23 +244,60 @@
             </button>
         </div>
         
-        <div class="mt-8">
-            <h3 class="text-2xl mb-4">Ou crie seu próprio destino:</h3>
-            <div class="max-w-md mx-auto">
-                <div class="flex">
-                    <input type="text" id="customLink" placeholder="https://exemplo.com" 
-                           class="flex-grow px-4 py-2 rounded-l-lg bg-gray-800 text-white focus:outline-none focus:ring-2 focus:ring-purple-500">
-                    <button onclick="navigateToCustomLink()" 
-                            class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-r-lg transition">
-                        <i class="fas fa-paper-plane"></i>
-                    </button>
+   
                 </div>
             </div>
         </div>
     </div>
     
-    <footer>
-        ATAland &copy; 2025 - Todos os direitos reservados
+ <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">AtaShop</h3>
+                    <p class="text-gray-400">A maior loja de ATAs escolares do Brasil. Transformando infrações em colecionáveis desde 2025.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Produtos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">ATAs Básicas</a></li>
+                        <li><a href="compra.html" class="text-gray-400 hover:text-white">ATAs Premium</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Colecionáveis</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pacotes</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Links Úteis</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Como colecionar</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Dicas para mais ATAs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Termos de uso</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Política de privacidade</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Redes Sociais</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                    <p class="text-gray-400 mt-4">Assine nossa assinatura ATAs plus</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Seu email" class="px-3 py-2 rounded-l-lg focus:outline-none text-gray-800 w-full">
+                        <button class="bg-indigo-600 px-4 rounded-r-lg"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 AtaShop - Todos as ATAs reservadas. ATAs não reais (ou será que são?).</p>
+            </div>
+        </div>
     </footer>
     
     <script>

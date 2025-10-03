@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enzo Bozz The Game</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes cry {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+            100% { transform: translateY(0); }
+        }
+        
+        @keyframes shake {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-5deg); }
+            100% { transform: rotate(0deg); }
+        }
+        
+        .crying {
+            animation: cry 0.5s infinite;
+        }
+        
+        .shaking {
+            animation: shake 0.2s infinite;
+        }
+        
+        .game-over {
+            background: repeating-linear-gradient(
+                45deg,
+                #ff0000,
+                #ff0000 10px,
+                #990000 10px,
+                #990000 20px
+            );
+        }
+        
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-blue-50 min-h-screen flex flex-col items-center justify-center p-4">
+    <div id="game-container" class="w-full max-w-2xl bg-white rounded-xl shadow-xl overflow-hidden fade-in">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-blue-500 to-purple-600 p-4 text-white">
+            <h1 class="text-2xl md:text-3xl font-bold text-center">Enzo Bozz The Game</h1>
+            <p class="text-center text-blue-100">Colégio Caminho do Saber</p>
+        </div>
+        
+        <!-- Game Area -->
+        <div class="p-6">
+            <!-- Status Bar -->
+            <div class="mb-6">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="font-semibold">Felicidade do Enzo:</span>
+                    <span id="happiness-value" class="font-bold">100%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-4">
+                    <div id="happiness-bar" class="progress-bar h-4 rounded-full bg-green-500" style="width: 100%"></div>
+                </div>
+            </div>
+            
+            <!-- Character -->
+            <div id="character-container" class="flex flex-col items-center mb-6">
+                <div id="character" class="relative w-40 h-40 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-2 w-32 h-32 bg-blue-300 rounded-full"></div>
+                    <div class="relative z-10 w-24 h-24 bg-white rounded-full flex items-center justify-center">
+                        <div class="w-16 h-16 bg-yellow-100 rounded-full flex flex-col items-center justify-center">
+                            <div class="flex space-x-2 mb-1">
+                                <div class="w-4 h-4 bg-blue-600 rounded-full"></div>
+                                <div class="w-4 h-4 bg-blue-600 rounded-full"></div>
+                            </div>
+                            <div class="w-8 h-2 bg-red-400 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div id="tears" class="hidden absolute top-full left-1/2 transform -translate-x-1/2 w-8 h-16">
+                        <div class="absolute top-0 left-0 w-4 h-4 bg-blue-400 rounded-full"></div>
+                        <div class="absolute top-2 left-4 w-4 h-4 bg-blue-400 rounded-full"></div>
+                        <div class="absolute top-4 left-0 w-4 h-4 bg-blue-400 rounded-full"></div>
+                        <div class="absolute top-6 left-4 w-4 h-4 bg-blue-400 rounded-full"></div>
+                    </div>
+                </div>
+                <div id="character-mood" class="text-center px-4 py-2 bg-blue-100 rounded-lg font-medium">
+                    Enzo está feliz! 😊
+                </div>
+            </div>
+            
+            <!-- Scenario -->
+            <div id="scenario" class="mb-6 p-4 bg-gray-100 rounded-lg">
+                <h2 class="font-bold text-lg mb-2">Aula Online de Matemática</h2>
+                <p id="scenario-text">O professor está fazendo uma pergunta para a turma. Enzo precisa responder corretamente para não perder pontos!</p>
+            </div>
+            
+            <!-- Actions -->
+            <div id="actions" class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                <button onclick="handleAction('answer_correctly')" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg transition">
+                    <i class="fas fa-check-circle mr-2"></i> Responder corretamente
+                </button>
+                <button onclick="handleAction('answer_wrong')" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg transition">
+                    <i class="fas fa-times-circle mr-2"></i> Responder errado
+                </button>
+                <button onclick="handleAction('comfort')" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition">
+                    <i class="fas fa-hands-helping mr-2"></i> Ajudar Enzo
+                </button>
+                <button onclick="handleAction('insult')" class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg transition">
+                    <i class="fas fa-meh-rolling-eyes mr-2"></i> Chamar de calvo
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Game Over Modal -->
+    <div id="game-over-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="game-over w-full max-w-md rounded-xl overflow-hidden text-white text-center">
+            <div class="p-8">
+                <h2 class="text-4xl font-bold mb-4 shaking">GAME OVER!</h2>
+                <div class="text-6xl mb-6 crying">😭</div>
+                <p class="text-xl mb-6">Enzo está chorando que nem um bebezinho!</p>
+                <p class="mb-8">Você não conseguiu manter Enzo feliz. Ele está descontrolado e todos na escola estão rindo dele!</p>
+                <button onclick="restartGame()" class="bg-white text-red-600 font-bold py-3 px-6 rounded-lg hover:bg-gray-200 transition">
+                    <i class="fas fa-redo mr-2"></i> Tentar novamente
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Game state
+        const gameState = {
+            happiness: 100,
+            scenarios: [
+                {
+                    title: "Aula Online de Matemática",
+                    text: "O professor está fazendo uma pergunta para a turma. Enzo precisa responder corretamente para não perder pontos!",
+                    actions: {
+                        answer_correctly: {
+                            text: "Enzo respondeu corretamente! Ele está orgulhoso de si mesmo.",
+                            happiness: +10
+                        },
+                        answer_wrong: {
+                            text: "Enzo errou a resposta! Ele está frustrado e quase chorando.",
+                            happiness: -20
+                        },
+                        comfort: {
+                            text: "Você ajudou Enzo com a resposta. Ele está um pouco menos nervoso.",
+                            happiness: +5
+                        },
+                        insult: {
+                            text: "Você chamou Enzo de calvo! Ele está chorando copiosamente!",
+                            happiness: -40,
+                            special: "cry"
+                        }
+                    }
+                },
+                {
+                    title: "Prova de Português",
+                    text: "Enzo recebeu a nota da prova de Português. Ele tirou 7.5, mas os pais esperavam que ele tirasse pelo menos 8.",
+                    actions: {
+                        answer_correctly: {
+                            text: "Você convenceu Enzo que 7.5 é uma boa nota. Ele está um pouco melhor.",
+                            happiness: +5
+                        },
+                        answer_wrong: {
+                            text: "Enzo está pensando que seus pais vão ficar muito bravos! Ele está se sentindo péssimo.",
+                            happiness: -25
+                        },
+                        comfort: {
+                            text: "Você disse que vai ajudar Enzo a estudar para a próxima prova. Ele está um pouco mais animado.",
+                            happiness: +15
+                        },
+                        insult: {
+                            text: "Você disse que ele é burro mesmo! Enzo está chorando e dizendo que vai contar para a mãe!",
+                            happiness: -35,
+                            special: "cry"
+                        }
+                    }
+                },
+                {
+                    title: "Intervalo na Escola",
+                    text: "No intervalo, alguns colegas estão rindo de Enzo porque ele trouxe um lanche diferente.",
+                    actions: {
+                        answer_correctly: {
+                            text: "Enzo ignorou os colegas e comeu seu lanche feliz!",
+                            happiness: +10
+                        },
+                        answer_wrong: {
+                            text: "Enzo ficou com vergonha e jogou o lanche no lixo! Ele está triste.",
+                            happiness: -15
+                        },
+                        comfort: {
+                            text: "Você disse que o lanche dele é legal e comeu junto. Enzo está feliz!",
+                            happiness: +20
+                        },
+                        insult: {
+                            text: "Você concordou que o lanche é esquisito! Enzo está chorando e dizendo que nunca mais traz lanche!",
+                            happiness: -30,
+                            special: "cry"
+                        }
+                    }
+                },
+                {
+                    title: "Aula de Educação Física",
+                    text: "Enzo não quer participar da aula porque pode suar e estragar seu cabelo novo.",
+                    actions: {
+                        answer_correctly: {
+                            text: "Você convenceu Enzo que um pouco de exercício faz bem. Ele está participando relutantemente.",
+                            happiness: +5
+                        },
+                        answer_wrong: {
+                            text: "Enzo se recusou a participar e o professor deu advertência! Ele está furioso!",
+                            happiness: -20
+                        },
+                        comfort: {
+                            text: "Você prometeu ajudar Enzo a arrumar o cabelo depois. Ele está um pouco mais tranquilo.",
+                            happiness: +10
+                        },
+                        insult: {
+                            text: "Você disse que ele já é calvo mesmo! Enzo está chorando e correu para o banheiro!",
+                            happiness: -50,
+                            special: "cry"
+                        }
+                    }
+                }
+            ],
+            currentScenario: 0
+        };
+        
+        // DOM elements
+        const happinessBar = document.getElementById('happiness-bar');
+        const happinessValue = document.getElementById('happiness-value');
+        const characterMood = document.getElementById('character-mood');
+        const scenarioText = document.getElementById('scenario-text');
+        const scenarioTitle = document.querySelector('#scenario h2');
+        const character = document.getElementById('character');
+        const tears = document.getElementById('tears');
+        const gameOverModal = document.getElementById('game-over-modal');
+        const gameContainer = document.getElementById('game-container');
+        
+        // Update happiness display
+        function updateHappiness() {
+            const happiness = gameState.happiness;
+            happinessBar.style.width = `${happiness}%`;
+            happinessValue.textContent = `${happiness}%`;
+            
+            // Change color based on happiness
+            if (happiness > 70) {
+                happinessBar.className = 'progress-bar h-4 rounded-full bg-green-500';
+                characterMood.textContent = 'Enzo está feliz! 😊';
+            } else if (happiness > 40) {
+                happinessBar.className = 'progress-bar h-4 rounded-full bg-yellow-500';
+                characterMood.textContent = 'Enzo está irritado. 😠';
+            } else if (happiness > 20) {
+                happinessBar.className = 'progress-bar h-4 rounded-full bg-orange-500';
+                characterMood.textContent = 'Enzo está muito chateado! 😤';
+            } else {
+                happinessBar.className = 'progress-bar h-4 rounded-full bg-red-500';
+                characterMood.textContent = 'Enzo está quase chorando! 😫';
+            }
+            
+            // Check for game over
+            if (happiness <= 0) {
+                gameOver();
+            }
+        }
+        
+        // Handle player actions
+        function handleAction(action) {
+            const scenario = gameState.scenarios[gameState.currentScenario];
+            const actionResult = scenario.actions[action];
+            
+            // Update happiness
+            gameState.happiness += actionResult.happiness;
+            if (gameState.happiness > 100) gameState.happiness = 100;
+            
+            // Update scenario text
+            scenarioText.textContent = actionResult.text;
+            
+            // Handle special effects
+            if (actionResult.special === 'cry') {
+                character.classList.add('crying');
+                tears.classList.remove('hidden');
+                setTimeout(() => {
+                    character.classList.remove('crying');
+                    tears.classList.add('hidden');
+                }, 2000);
+            }
+            
+            // Update happiness display
+            updateHappiness();
+            
+            // Move to next scenario
+            setTimeout(() => {
+                gameState.currentScenario = (gameState.currentScenario + 1) % gameState.scenarios.length;
+                loadScenario();
+            }, 2000);
+        }
+        
+        // Load current scenario
+        function loadScenario() {
+            const scenario = gameState.scenarios[gameState.currentScenario];
+            scenarioTitle.textContent = scenario.title;
+            scenarioText.textContent = scenario.text;
+        }
+        
+        // Game over function
+        function gameOver() {
+            gameContainer.classList.add('hidden');
+            gameOverModal.classList.remove('hidden');
+        }
+        
+        // Restart game
+        function restartGame() {
+            gameState.happiness = 100;
+            gameState.currentScenario = 0;
+            gameOverModal.classList.add('hidden');
+            gameContainer.classList.remove('hidden');
+            loadScenario();
+            updateHappiness();
+        }
+        
+        // Initialize game
+        loadScenario();
+        updateHappiness();
+    </script>
+</body>
+</html>

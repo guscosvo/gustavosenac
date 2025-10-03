@@ -114,37 +114,61 @@
                     <i class="fas fa-paper-plane mr-2"></i> Enviar Avaliação
                 </button>
             </div>
+</div>
+</div>
 
-            <!-- Lista de avaliações -->
-            <div class="bg-white rounded-xl shadow-md p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-2xl font-semibold text-gray-800">Avaliações Recentes</h2>
-                    <div class="relative">
-                        <select id="sort-reviews" class="appearance-none bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 pr-8 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <option value="newest">Mais recentes</option>
-                            <option value="highest">Melhores avaliações</option>
-                            <option value="lowest">Piores avaliações</option>
-                        </select>
-                        <i class="fas fa-chevron-down absolute right-3 top-3 text-gray-500"></i>
-                    </div>
+                
+
+
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">AtaShop</h3>
+                    <p class="text-gray-400">A maior loja de ATAs escolares do Brasil. Transformando infrações em colecionáveis desde 2025.</p>
                 </div>
                 
-                <div id="reviews-container">
-                    <!-- As avaliações serão carregadas aqui -->
-                    <div class="text-center py-8 text-gray-500" id="no-reviews">
-                        <i class="fas fa-comments text-4xl mb-3"></i>
-                        <p>Nenhuma avaliação ainda. Seja o primeiro a avaliar!</p>
-                    </div>
+                <div>
+                    <h4 class="font-bold mb-4">Produtos</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">ATAs Básicas</a></li>
+                        <li><a href="compra.html" class="text-gray-400 hover:text-white">ATAs Premium</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Colecionáveis</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pacotes</a></li>
+                    </ul>
                 </div>
                 
-                <div class="mt-6 text-center">
-                    <button id="load-more" class="text-indigo-600 hover:text-indigo-800 font-medium hidden">
-                        <i class="fas fa-sync-alt mr-2"></i>Carregar mais avaliações
-                    </button>
+                <div>
+                    <h4 class="font-bold mb-4">Links Úteis</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Como colecionar</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Dicas para mais ATAs</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Termos de uso</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Política de privacidade</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Redes Sociais</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                    <p class="text-gray-400 mt-4">Assine nossa assinatura ATAs plus</p>
+                    <div class="flex mt-2">
+                        <input type="email" placeholder="Seu email" class="px-3 py-2 rounded-l-lg focus:outline-none text-gray-800 w-full">
+                        <button class="bg-indigo-600 px-4 rounded-r-lg"><i class="fas fa-paper-plane"></i></button>
+                    </div>
                 </div>
             </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 AtaShop - Todos as ATAs reservadas. ATAs não reais (ou será que são?).</p>
+            </div>
         </div>
-    </div>
+    </footer>
 
     <!-- Notificação -->
     <div id="notification" class="fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden items-center">
