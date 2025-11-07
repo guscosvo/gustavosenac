@@ -1,13 +1,13 @@
-var imagens = [
+        var imagens = [
             "1.jpg",
             "2.jpg",
             "3.png",
         ];
-       
+        
         var indice = 0;
- 
+
         var banner = document.getElementById('banner')
- 
+
         function mostrarImagens(){
             banner.src = imagens[indice];
         }
@@ -17,7 +17,7 @@ var imagens = [
                 indice = 0;
             }
             mostrarImagens();
- 
+
         }
         function voltar(){
             indice--;

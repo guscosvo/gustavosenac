@@ -1,0 +1,304 @@
+<!DOCTYPE html> 
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GORDO FELIZ - A vida é curta demais pra hambúrguer pequeno.</title>
+    <link rel="stylesheet" href="css/estilo.css" />
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Raleway", sans-serif;
+            background-color: #fff;
+        }
+
+        /* TOPO */
+        #topo-porcento {
+            width: 100%;
+            background-color: rgb(0, 0, 41);
+            color: white;
+            padding: 10px 0;
+        }
+
+        #topo {
+            width: 90%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* LOGO + TEXTO */
+        #logo {
+            display: flex;
+            align-items: center;
+        }
+
+        #logo img {
+            margin-right: 10px;
+        }
+
+        #logo span {
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        /* MENU */
+        #menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        #menu a {
+            color:red;
+            text-decoration:none;
+            font-weight: 500;
+            transition: 0.3s;
+            font-size: 18px;
+        }
+
+        #menu a:hover {
+            color: rgb(255, 230, 0);
+            transform: scale(1.05);
+        }
+
+        /* BANNER */
+        #animacao {
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        #animacao img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+
+
+        #centraliza input {
+            background-color: rgb(0, 0, 41);
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-size: 18px;
+            margin: 0 5px;
+        }
+
+        #centraliza input:hover {
+            background-color: rgb(20, 20, 80);
+        }
+
+        /* TÍTULO */
+        #containerTitulo {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* ÁREA DOS CARDS */
+        #containerCardapio {
+            width: 90%;
+            max-width: 1000px;
+            margin: 30px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .xis-card {
+            border: 1px solid #b7b6b6;
+            color:rgb(0, 0, 37);
+            padding: 20px;
+
+        }
+
+
+        
+
+        /* BOTÃO COMPRAR VERDE */
+        button {
+         background-color: #28a745;
+         color: white;
+         border: 2px solid black; /* ← aqui */
+         padding: 10px 20px;
+         border-radius: 5px;
+         cursor: pointer;
+         transition: background-color 0.3s ease, transform 0.1s ease;
+        }
+        button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+
+        /* RODAPÉ */
+        #rodape-porcento {
+            background-color: rgb(35, 35, 35);
+            color: white;
+            padding: 15px 0;
+            margin-top: 40px;
+        }
+
+        #rodape {
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="topo-porcento"> 
+        <div id="topo">
+            <div id="logo"> 
+                <img src="logo.png" width="80" alt="Logo Gordo Feliz">
+                <span>Gordo Feliz!</span>
+            </div>
+            <div id="menu"> 
+                <a href="index.html">Home</a>
+                <a href="contato.html">Contato</a>
+            </div>
+        </div>    
+    </div>
+
+    <!-- BANNER -->
+    <div id="animacao">
+        <img src="1.png" id="banner" alt="Banner">
+    </div>
+
+
+    <div id="containerTitulo">
+        CARDÁPIO
+    </div>
+
+    <!-- CARDÁPIO -->
+    <div id="containerCardapio">
+        <div class="xis-card bg-white relative">
+            <h3 class="text-xl font-bold">Xis dieta</h3>
+            <span>R$ 34,99</span>
+            <p>Leva o corpo à plenitude e a dieta pro inferno.</p>
+            <p>pão integral (pra fingir ser saudável), hambúrguer bovino, queijo minas, rúcula, tomate seco e maionese de ervas.</p>
+            <button class="comprar">Comprar</button>
+        </div>
+
+        <div class="xis-card bg-white relative">
+            <h3 class="text-xl font-bold">Xis da Nutricionista</h3>
+            <span>R$ 54,90</span>
+            <p>"Ela nunca deixaria, mas a gente fez mesmo assim."</p>
+            <p>pão integral, hambúrguer vegetal, queijo branco, alface, tomate, maionese light e um toque de ironia.</p>
+            <button class="comprar">Comprar</button>
+        </div>
+
+        <div class="xis-card bg-white relative">
+            <h3 class="text-xl font-bold">Xis Padrão de Excelência</h3>
+            <span>R$ 60,50</span>
+            <p>"Cumpre o que promete e ainda vem com nota fiscal de sabor."</p>
+            <p>pão, hambúrguer artesanal, queijo, presunto, ovo, alface, tomate, milho, maionese da casa e batata palha.</p>
+            <button class="comprar">Comprar</button>
+        </div>
+
+        <div class="xis-card bg-white relative">
+            <h3 class="text-xl font-bold">Xis segunda-feira</h3>
+            <span>R$ 45,00</span>
+            <p>"Pesado, cansado e totalmente necessário pra começar a semana."</p>
+            <p>pão, hambúrguer duplo, bacon crocante, queijo cheddar, cebola caramelizada e maionese defumada.</p>
+            <button class="comprar">Comprar</button>
+        </div>
+
+        <div class="xis-card bg-white relative">
+            <h3 class="text-xl font-bold">Xis da Madrugada</h3>
+            <span>R$ 85,00</span>
+            <p>"O lanche que te abraça às 3 da manhã e diz: tá tudo bem."</p>
+            <p>pão australiano, hambúrguer bovino, queijo prato, ovo frito, alface americana, molho especial e batata frita dentro.</p>
+            <button class="comprar">Comprar</button>
+        </div>
+
+
+        <div class="xis-card bg-white relative">
+            <h3 class="text-xl font-bold">Xis 220v </h3>
+            <span>R$ 45,00</span>
+            <p>"Ligado direto na tomada da fritadeira."</p>
+            <p>pão, hambúrguer bovino e de frango juntos, queijo duplo, molho de alho e maionese picante.</p>
+            <button class="comprar">Comprar</button>
+        </div>
+
+        
+        <div class="xis-card bg-white relative">
+            <h3 class="text-xl font-bold">Xis Colesterol Supremo</h3>
+            <span>R$ 45,00</span>
+            <p>"Cada mordida é uma consulta com o cardiologista."</p>
+            <p>três hambúrgueres, bacon, cheddar triplo, ovo, calabresa, batata frita, maionese e coragem.</p>
+            <button class="comprar">Comprar</button>
+        </div>
+
+       <div class="xis-card bg-white relative">
+            <h3 class="text-xl font-bold">Xis apocalipse</h3>
+            <span>R$ 45,00</span>
+            <p>"Feito pra quem quer comer como se não houvesse amanhã (e talvez não haja mesmo)."</p>
+             <p>pão brioche, hambúrguer bovino 180g, queijo cheddar, bacon, onion rings e molho barbecue.</p>
+            <button class="comprar">Comprar</button>
+        </div>
+
+
+       <div class="xis-card bg-white relative">
+            <h3 class="text-xl font-bold">Xis Ragnarök</h3>
+            <span>R$ 45,00</span>
+            <p>"Queijo derretido o suficiente pra afogar um deus nórdico."</p>
+             <p>pão brioche, hambúrguer bovino 180g, queijo cheddar, bacon, onion rings e molho barbecue.</p>
+            <button class="comprar">Comprar</button>
+        </div>
+
+    </div>
+
+    <div id="rodape-porcento">
+        <div id="rodape">
+            <p>Desenvolvido - Gustavo, Vinicius e Fernando © Todos os direitos (e hambúrguers) reservados (2025)</p>
+        </div>
+    </div>
+
+    <!-- SCRIPT DO BANNER -->
+    <script>
+        let imagens = [
+            "1.png",
+            "2.png",
+            "3.png"
+        ];
+        let indice = 0;
+        const banner = document.getElementById("banner");
+
+        function atualizarBanner() {
+            banner.src = imagens[indice];
+        }
+
+        function ir() {
+            indice = (indice + 1) % imagens.length;
+            atualizarBanner();
+        }
+
+        function voltar() {
+            indice = (indice - 1 + imagens.length) % imagens.length;
+            atualizarBanner();
+        }
+
+        // Troca automática a cada 5 segundos
+        setInterval(ir, 5000);
+
+        // ALERTA DE COMPRA
+        const botoes = document.querySelectorAll('.comprar');
+        botoes.forEach(botao => {
+            botao.addEventListener('click', () => {
+                alert('🍔 Item adicionado ao carrinho!');
+            });
+        });
+    </script>
+</body>
+</html>
