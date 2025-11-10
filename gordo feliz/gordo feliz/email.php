@@ -19,7 +19,7 @@ class Email extends PHPMailer
         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
         $mail->From     = "contatomedio@tripwiser.com.br";
         $mail->Sender   = "gustavo2430costa@gmail.com";
-        $mail->FromName = "Ensino Médio";
+        $mail->FromName = "Gordo Feliz";
 
         // Define os destinatário(s)
         // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

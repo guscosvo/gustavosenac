@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gordo Feliz - Contato</title>
+    <link rel="stylesheet" href="estilo.css">
     <link rel="icon" type="image/x-icon" href="icon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>Gordo Feliz - localização</title>
 
-    <style>
+        <style>
         body {
             margin: 0;
             font-family: "Raleway", sans-serif;
@@ -47,6 +49,7 @@
         }
 
 
+
         #menu {
             display: flex;
             gap: 30px;
@@ -65,20 +68,14 @@
             transform: scale(1.05);
         }
 
-     /*imput do contado, deixar ele escuro que vi na internet */
 
-      input, textarea {
-           background-color: rgb(21, 12, 38);
-           color: #fff !important;
-           border: 1px solid #ffcc00;
-           padding: 14px 12px !important;
-           border-radius: 8px;
-           width: 100%;
-        }
-
-        #redes {
-           text-align: center;
-           margin-top: 20px;
+        #endereco {
+            color: rgb(255, 255, 255);
+            padding: 5px 0;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 700;
+            width: 40;
         }
 
         /* TÍTULO */
@@ -89,6 +86,14 @@
             font-weight: 700;
         }
 
+        #telefone {
+            background-color: rgb(0, 0, 43);
+            color: rgb(255, 0, 0);
+            padding: 10px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: 700;
+        }
         /* RODAPÉ */
         #rodape-porcento {
             background-color: rgb(35, 35, 35);
@@ -117,45 +122,23 @@
             </div>
         </div>    
     </div>
-
-    <!-- contato-->
-    <section id="contato" class="py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 text-red-700">Entre em Contato</h2>
-            
-            <form>
-                <div class="mb-6">
-                    <label for="name" class="block text-yellow-500 font-medium mb-2">Nome:</label>
-                    <input type="text" id="name" placeholder="Seu nome completo">
-                </div>
-                
-                <div class="mb-6">
-                    <label for="email" class="block text-yellow-500 font-medium mb-2">Email:</label>
-                    <input type="email" id="email" placeholder="exemplo@email.com">
-                </div>
-                
-                <div class="mb-6">
-                    <label for="message" class="block text-yellow-500 font-medium mb-2">Mensagem:</label>
-                    <textarea id="message" rows="4" placeholder="Digite sua mensagem..."></textarea>
-                </div>
-                
-                <button type="submit" class="w-full bg-red-600 text-white py-3 rounded-lg font-bold hover:bg-yellow-500 hover:text-black transition">Enviar Mensagem</button>
-            </form>
+   
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d870.9667429292717!2d-51.2000386065391!3d-29.168592122723073!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951ea3200efac6ed%3A0x7cd369232232c419!2sSenac%20Caxias%20do%20Sul!5e0!3m2!1spt-BR!2sbr!4v1756990671506!5m2!1spt-BR!2sbr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+ 
+    </div>
+    
+    <div id="telefone">
+        telefone:
+    </div>
+        <div id="endereco">
+            <p>Telefone: (54) 40028922</p>
+            <p>Whatsapp: (54) 9940028922</p>
         </div>
-    </section>
-
-    <!-- Rodapé -->
     <div id="rodape-porcento">
         <div id="rodape">
             <p>Desenvolvido - SenacRS - Gustavo Costa (guscosvo) © Todos os direitos reservados (2025)</p>
-            
-         <div id="redes">
-                    <h4 class="font-bold mb-4">Redes Sociais</h4>
-                        <a href="https://www.instagram.com/guscosvo/" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.tiktok.com/@guscosvo" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-tiktok"></i></a>
-                    </div>
-
         </div>
     </div>
 </body>
 </html>
+ 

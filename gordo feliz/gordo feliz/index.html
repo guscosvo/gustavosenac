@@ -14,13 +14,13 @@
         body {
             margin: 0;
             font-family: "Raleway", sans-serif;
-            background-color: #fff;
+                       background-color:rgb(25, 25, 87)
         }
 
         /* TOPO */
         #topo-porcento {
             width: 100%;
-            background-color: rgb(0, 0, 41);
+            background-color: rgb(16, 16, 42);
             color: white;
             padding: 10px 0;
         }
@@ -47,12 +47,14 @@
             font-size: 26px;
             font-weight: 700;
             letter-spacing: 1px;
+            color: red; 
         }
 
         /* MENU */
         #menu {
             display: flex;
             gap: 30px;
+            
         }
 
         #menu a {
@@ -100,7 +102,9 @@
 
         /* TÍTULO */
         #containerTitulo {
-            margin-top: 20px;
+            background-color: rgb(0, 0, 43);
+            color: rgb(255, 0, 0);
+            padding: 10px 0;
             text-align: center;
             font-size: 24px;
             font-weight: 700;
@@ -116,32 +120,31 @@
             gap: 25px;
         }
 
-        .xis-card {
-            border: 1px solid #b7b6b6;
-            color:rgb(0, 0, 37);
+        .xis-card { 
+            border: 2px solid #615900;
+            color:rgb(255, 255, 255);
             padding: 20px;
+            border-radius: 19px;
+            background-color: rgb(0, 0, 42);
 
         }
-
-
-        
-
-        /* BOTÃO COMPRAR VERDE */
+       
         button {
-         background-color: #28a745;
-         color: white;
-         border: 2px solid black; /* ← aqui */
+         background-color: #020a46;
+         color: rgb(214, 255, 221);
+         border: 2px solid rgb(0, 37, 112);
          padding: 10px 20px;
-         border-radius: 5px;
+         border-radius: 10px;
          cursor: pointer;
-         transition: background-color 0.3s ease, transform 0.1s ease;
+
         }
         button:hover {
-            background-color: #218838;
+            background-color: #556500;
+            border: 2px solid yellow;
             transform: scale(1.05);
         }
 
-        /* RODAPÉ */
+        
         #rodape-porcento {
             background-color: rgb(35, 35, 35);
             color: white;
@@ -153,10 +156,14 @@
             text-align: center;
             font-size: 14px;
         }
+
+        
     </style>
 </head>
 <body>
 
+
+    
     <div id="topo-porcento"> 
         <div id="topo">
             <div id="logo"> 
@@ -166,6 +173,7 @@
             <div id="menu"> 
                 <a href="index.html">Home</a>
                 <a href="contato.html">Contato</a>
+                <a href="local.html">Localização</a>
             </div>
         </div>    
     </div>
@@ -180,12 +188,14 @@
         CARDÁPIO
     </div>
 
+
+
     <!-- CARDÁPIO -->
     <div id="containerCardapio">
         <div class="xis-card bg-white relative">
             <h3 class="text-xl font-bold">Xis dieta</h3>
             <span>R$ 34,99</span>
-            <p>Leva o corpo à plenitude e a dieta pro inferno.</p>
+            <p>"Leva o corpo à plenitude e a dieta pro inferno."</p>
             <p>pão integral (pra fingir ser saudável), hambúrguer bovino, queijo minas, rúcula, tomate seco e maionese de ervas.</p>
             <button class="comprar">Comprar</button>
         </div>
@@ -240,8 +250,8 @@
             <button class="comprar">Comprar</button>
         </div>
 
-       <div class="xis-card bg-white relative">
-            <h3 class="text-xl font-bold">Xis apocalipse</h3>
+       <div class="xis-card">
+            <h3 class="text-xl bg-blue-1000 font-bold">Xis apocalipse</h3>
             <span>R$ 45,00</span>
             <p>"Feito pra quem quer comer como se não houvesse amanhã (e talvez não haja mesmo)."</p>
              <p>pão brioche, hambúrguer bovino 180g, queijo cheddar, bacon, onion rings e molho barbecue.</p>
@@ -261,7 +271,7 @@
 
     <div id="rodape-porcento">
         <div id="rodape">
-            <p>Desenvolvido - Gustavo, Vinicius e Fernando © Todos os direitos (e hambúrguers) reservados (2025)</p>
+            <p>Desenvolvido - SenacRS - Gustavo Costa (guscosvo) © Todos os direitos reservados (2025)</p>
         </div>
     </div>
 
