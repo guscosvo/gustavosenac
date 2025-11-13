@@ -25,7 +25,7 @@
         }
 
         #topo {
-            width: 90%;
+            width: 80%;
             margin: auto;
             display: flex;
             align-items: center;
@@ -50,24 +50,68 @@
 
 
 
+      
+        /* MENU */
         #menu {
             display: flex;
             gap: 30px;
+            align-items: center;
         }
 
         #menu a {
-            color: rgb(255, 0, 0);
+            color: red;
             text-decoration: none;
             font-weight: 500;
             transition: 0.3s;
-            font-size: 19px;
+            font-size: 18px;
         }
 
         #menu a:hover {
             color: rgb(255, 230, 0);
             transform: scale(1.05);
+            text-decoration: underline;
         }
 
+        /* Link ativo */
+        #menu a.ativo {
+            color: rgb(187, 255, 0);
+            text-decoration: underline;
+            font-weight: 700;
+        }
+        /* RODAPÉ */
+        #rodape-porcento {
+            background-color: rgb(35, 35, 35);
+            color: white;
+            padding: 15px 0;
+            margin-top: 40px;
+        }
+
+        #rodape {
+            text-align: center;
+            font-size: 14px;
+        }
+
+        #anu {
+
+            gap: 30px;
+            align-items: center;
+        }
+
+        #anu a {
+            color: rgb(155, 155, 155);
+            align-items: center;
+            font-size:9px;
+        }
+
+        #anu a:hover {
+            color: rgb(255, 230, 0);
+
+        }
+
+        #infarto{
+            font-size: 8px;
+            color:rgb(17, 17, 17);
+        }
 
         #endereco {
             color: rgb(255, 255, 255);
@@ -78,7 +122,7 @@
             width: 40;
         }
 
-        /* TÍTULO */
+
         #containerTitulo {
             margin-top: 20px;
             text-align: center;
@@ -94,18 +138,7 @@
             font-size: 24px;
             font-weight: 700;
         }
-        /* RODAPÉ */
-        #rodape-porcento {
-            background-color: rgb(35, 35, 35);
-            color: white;
-            padding: 15px 0;
-            margin-top: 40px;
-        }
 
-        #rodape {
-            text-align: center;
-            font-size: 14px;
-        }
     </style>
 </head>
 <body>
@@ -118,7 +151,7 @@
             <div id="menu"> 
                 <a href="index.html">Home</a>
                 <a href="contato.html">Contato</a>
-                <a href="local.html">Localizção</a>
+                <a href="local.html" class="ativo">Localização</a>
             </div>
         </div>    
     </div>
@@ -134,11 +167,41 @@
             <p>Telefone: (54) 40028922</p>
             <p>Whatsapp: (54) 9940028922</p>
         </div>
+
+            
+    <div id="telefone">
+        local:
+    </div>
+        <div id="endereco">
+            <p>rua: esquina com av.gordolento e joão domingos </p>
+            <p>bairro: los barris</p>
+            <p>cidade: caxias do sul</p>
+            <p>estado: Rio Grande do Sul</p>
+            <p></p>
+        </div>
+
+            
+    <div id="telefone">
+        a vida é curta demais para um hamburguer pequeno.
+    </div>
+
+<footer>
     <div id="rodape-porcento">
         <div id="rodape">
             <p>Desenvolvido - SenacRS - Gustavo Costa (guscosvo) © Todos os direitos reservados (2025)</p>
+            <p>obrigado pela preferencia!</p>
+            <div id="anu">
+            <a href="local.html">Tiktok</a>
+            <a href="local.html">Instagram</a>
+            <a href="#">Política e privacidade</a>
+            <div id="infarto">
+            <p>não se responsabilizamos por infarto.</p>
+                  </div>
+            </div>
         </div>
     </div>
+ </footer>
+
 </body>
 </html>
  
